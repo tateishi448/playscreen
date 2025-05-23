@@ -10,7 +10,7 @@
             padding: 5vh 0; /* 上下5vhのパディング */
             font-family: sans-serif;
             background-color: #f0f2f5;
-            min-height: 100vh; /* ページの高さは少なくとも100vh */
+            min-height: 200vh; /* ページの高さを大幅に増加 */
             box-sizing: border-box; /* paddingを含めて高さ計算 */
             position: relative; /* 子要素のabsolute/fixedの基準になりうるが、fixedはviewport基準なので必須ではない */
         }
@@ -27,7 +27,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px; /* フォームの最大幅 */
-            margin: 0 auto 30px auto; /* 中央寄せと、下部にスペースを追加 */
+            margin: 0 auto 50px auto; /* 中央寄せと、下部にスペースを追加 */
             text-align: center;
             box-sizing: border-box; /* パディングを含めて幅計算 */
             position: relative; /* 警告オーバーレイのためにpositionを追加 */
@@ -100,37 +100,87 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* 新しい関連コンテンツエリアのスタイル */
-        .related-content {
-            max-width: 400px; /* ログインフォームと同じ幅に */
-            margin: 20px auto; /* 中央寄せと、上下にスペースを追加 */
-            padding: 20px;
-            background-color: #e9ecef; /* 少し異なる背景色 */
+        /* 共通のコンテンツエリアスタイル */
+        .content-section {
+            max-width: 600px; /* ログインフォームより少し幅広に */
+            margin: 30px auto; /* 中央寄せと、上下にスペースを追加 */
+            padding: 30px;
+            background-color: #fff;
             border-radius: 8px;
-            font-size: 0.9em;
-            color: #555;
-            line-height: 1.6;
-            box-sizing: border-box; /* パディングを含めて幅計算 */
-            position: relative; /* z-indexの指定のためpositionを追加 */
-            z-index: 1; /* オーバーレイより手前に表示（login-containerと同じでOK） */
-        }
-
-        .related-content h3 {
-            margin-top: 0;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1em;
             color: #333;
+            line-height: 1.7;
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
 
-        .related-content p {
+        .content-section h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #007bff;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
             margin-bottom: 15px;
         }
 
-        .related-content ul {
+        .content-section ul {
             padding-left: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .related-content li {
-             margin-bottom: 5px;
+        .content-section li {
+             margin-bottom: 8px;
+        }
+
+        /* 特別なセクション用のスタイル */
+        .highlight-section {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+        }
+
+        .info-section {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+
+        /* フッターエリア */
+        .footer-section {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-section h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #adb5bd;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .content-section {
+                max-width: 90%;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            
+            .login-container {
+                max-width: 90%;
+                margin: 0 auto 30px auto;
+                padding: 30px;
+            }
         }
 
     </style>
@@ -148,38 +198,87 @@
             <input type="password" id="password" name="password" required>
         </div>
         <button type="submit">ログイン</button>
+    </div>
 
-        </div>
-
-    <div class="related-content">
+    <div class="content-section">
         <h3>ご利用について</h3>
-        <p>このページはデモンストレーション用です。実際のログイン機能はありません。</p>
-        <p>ブラウザの開発者ツール (F12キーなど) のコンソールタブを開くと、ウィンドウ/画面サイズの様々な情報がログとして表示されます。</p>
-        <ul>
-            <li>初期表示時</li>
-            <li>ページ読み込み完了時 (Load)</li>
-            <li>ウィンドウサイズ変更時 (Resize)</li>
-            <li>ページを閉じたり移動したりする際 (Unload)</li>
-        </ul>
-        <p>特にリサイズ時には、サイズが実際には変わっていない場合でもリサイズイベントが発生することがあり、その際に画面全体を覆う警告メッセージが表示されます。</p>
-        <p>このコンテンツエリアは、ページの高さを増やし、モバイル端末などでスクロールが必要になるように配置されています。</p>
-           <p style="text-align: center; margin-top: 20px;">--- ページ最下部付近 ---</p>
+        <p>このページはデモンストレーション用です。実際のログイン機能はありません。ブラウザの開発者ツール（F12キーなど）のコンソールタブを開くと、ウィンドウ/画面サイズの様々な情報がログとして表示されます。</p>
+        <p>ログが表示されるタイミングは以下の通りです：初期表示時、ページ読み込み完了時（Load）、ウィンドウサイズ変更時（Resize）、ページを閉じたり移動したりする際（Unload）です。</p>
+        <p>特にリサイズ時には、サイズが実際には変わっていない場合でもリサイズイベントが発生することがあり、その際に画面全体を覆う警告メッセージが表示されます。これは開発者がウィンドウサイズの動作を理解するためのデモ機能です。</p>
+    </div>
+
+    <div class="content-section highlight-section">
+        <h3>ブラウザサイズ情報について</h3>
+        <p>このページでは、様々なブラウザサイズ関連のプロパティを監視し、コンソールに出力しています。主な監視対象は以下の情報です。</p>
+        <p>ウィンドウのビューポートサイズ（window.innerWidth/innerHeight）は、ブラウザウィンドウ内でWebページが表示される領域のサイズを示します。これはスクロールバーの幅を除いた実際のコンテンツ表示領域です。</p>
+        <p>ウィンドウ全体のサイズ（window.outerWidth/outerHeight）は、ブラウザウィンドウ全体のサイズを示し、タイトルバーやメニューバー、スクロールバーなどを含みます。</p>
+        <p>画面の解像度（screen.width/height）は、ユーザーのディスプレイ全体の解像度を示します。マルチディスプレイ環境では、メインディスプレイの解像度が取得されます。</p>
+    </div>
+
+    <div class="content-section info-section">
+        <h3>Visual Viewport APIについて</h3>
+        <p>このページでは、比較的新しいVisual Viewport APIも使用しています。これは特にモバイルブラウザで重要な機能で、仮想キーボードが表示された際の実際の表示領域を取得できます。</p>
+        <p>デスクトップブラウザでも、ブラウザのズーム機能を使用した際の実際の表示領域やスケール情報を取得することができます。ズームレベルが変更されると、Visual Viewport APIのスケール値が変化し、実際の表示領域のサイズも変わります。</p>
+        <p>オフセット値（offsetLeft/offsetTop）は、Visual Viewportがページ全体のどの位置にあるかを示し、ページX/Y（pageLeft/pageTop）は、ページ座標系での位置を示します。</p>
+    </div>
+
+    <div class="content-section">
+        <h3>開発者向けの技術情報</h3>
+        <p>このページのJavaScriptコードでは、ページロードの完了を適切に管理するため、isPageLoadedフラグを使用しています。これにより、ページロード完了前のリサイズイベントでは警告メッセージが表示されないようになっています。</p>
+        <p>リサイズイベントの処理では、前回のウィンドウサイズと現在のサイズを比較し、実際にサイズが変化していない場合のみ警告メッセージを表示します。これは、一部のブラウザや環境で、実際にはサイズが変わっていないにも関わらずリサイズイベントが発生する現象をデモンストレーションするためです。</p>
+        <p>このような動作は、特に開発者ツールの開閉、ブラウザのズーム操作、外部ディスプレイの接続/切断時などに観察されることがあります。Web開発者にとって、これらの挙動を理解することは重要です。</p>
+    </div>
+
+    <div class="content-section highlight-section">
+        <h3>レスポンシブデザインとの関連</h3>
+        <p>現代のWebサイト開発では、レスポンシブデザインが標準となっています。このページで監視しているサイズ情報は、レスポンシブデザインの実装や デバッグに非常に役立ちます。</p>
+        <p>特に、ウィンドウサイズの変化を監視することで、CSSのメディアクエリの動作確認や、JavaScriptでの動的なレイアウト調整のテストが可能になります。また、異なるデバイスでの表示確認の際にも、これらの情報は参考になります。</p>
+        <p>モバイルファーストの設計思想に基づいたWebサイトでは、小さな画面から大きな画面への段階的な拡張を考慮する必要があります。このページのログ機能を使用することで、そのような設計の動作を詳細に観察できます。</p>
+    </div>
+
+    <div class="content-section info-section">
+        <h3>パフォーマンスとユーザビリティ</h3>
+        <p>ウィンドウサイズの変更は、Webページのパフォーマンスに大きな影響を与える可能性があります。リサイズイベントは短時間に大量に発生することがあり、適切な最適化なしに重い処理を実行すると、ユーザーエクスペリエンスが低下します。</p>
+        <p>一般的な最適化手法として、デバウンス（debounce）やスロットル（throttle）といった技術があります。これらは、イベントの発生頻度を制御し、パフォーマンスを向上させるために使用されます。</p>
+        <p>このページでは、デモンストレーション目的で全てのリサイズイベントをログに出力していますが、実際のプロダクションWebサイトでは、パフォーマンスを考慮した実装が必要です。</p>
+    </div>
+
+    <div class="content-section">
+        <h3>ブラウザ互換性について</h3>
+        <p>このページで使用している各種APIには、ブラウザごとの対応状況に違いがあります。window.innerWidth/innerHeightは古いブラウザでも広くサポートされていますが、Visual Viewport APIは比較的新しい機能です。</p>
+        <p>古いバージョンのInternet Explorerでは、一部のプロパティが正確に取得できない場合があります。また、モバイルブラウザでは、画面の向きの変更時に特別な考慮が必要になることがあります。</p>
+        <p>Cross-browser compatibility（クロスブラウザ互換性）を確保するためには、feature detection（機能検出）を行い、サポートされていないAPIに対してはフォールバック処理を実装することが推奨されます。</p>
+    </div>
+
+    <div class="content-section highlight-section">
+        <h3>アクセシビリティへの配慮</h3>
+        <p>このページの警告メッセージ機能は、視覚的なフィードバックを提供していますが、スクリーンリーダーなどの支援技術を使用するユーザーへの配慮も重要です。実際のWebサイトでは、ARIAラベルやlive regionの使用を検討する必要があります。</p>
+        <p>また、警告メッセージのオーバーレイ表示は、キーボードナビゲーションユーザーにとってアクセスしにくい可能性があります。ESCキーでの閉じる機能やフォーカス管理の実装が推奨されます。</p>
+        <p>ユニバーサルデザインの観点から、すべてのユーザーが平等にWebサイトを利用できるよう配慮することは、現代のWeb開発における重要な責務です。</p>
+    </div>
+
+    <div class="footer-section">
+        <h4>デモページについて</h4>
+        <p>このページは教育・デモンストレーション目的で作成されています。</p>
+        <p>実際のログイン機能や個人情報の処理は行いません。</p>
+        <p>ブラウザの開発者ツールでコンソールをご確認ください。</p>
+        <p style="margin-top: 30px; font-size: 0.8em; color: #adb5bd;">
+            © 2025 Demo Page - Browser Size Information Logger
+        </p>
     </div>
 
     <div id="size-warning"></div>
 
-
     <div id="size-info-area" style="display: none;">
         <h1>ブラウザ・ウィンドウサイズ情報ログ (非表示)</h1>
         <p>このエリアはログインページ風にするために非表示になっています。</p>
-        </div>
+    </div>
 
     <div id="long-content-container" style="display: none;">
         <h2>スクロールを発生させるためのダミーコンテンツエリア (非表示)</h2>
         <p>このエリアはログインページ風にするために非表示になっています。</p>
         <div class="content-filler">ダミーコンテンツ その1</div>
-        </div>
-
+    </div>
 
     <script>
         // 以前のウィンドウサイズを記録するための変数
@@ -228,43 +327,26 @@
                     return; // ロード完了前なので、ここで処理を終了
                 }
 
-
-                // 初回Resizeイベント時、またはロード完了前にResizeが発生した場合は、サイズを記録するだけ
-                // isPageLoaded フラグを導入したので、このブロックはロード完了後には入らなくなります。
-                // ロード完了前のResizeイベントは上記の !isPageLoaded チェックでスキップされます。
-                // ロード完了後に初めてResizeイベントが発生した場合は、previousWidth/Heightはloadイベントで設定されているはずです。
-                // なので、以下の !isPageLoaded でスキップされるロジックはもはや不要かもしれません。
-                // 一旦残しておき、挙動を確認後に削除を検討しても良いでしょう。
-
-                // if (previousWidth === -1 || previousHeight === -1) {
-                //     previousWidth = currentWidth;
-                //     previousHeight = currentHeight;
-                //     console.log('Resizeイベント初回検出またはロード前Resize。現在のサイズを記録:', previousWidth, 'x', previousHeight);
-                //     if (sizeWarningElement) { // 要素が存在するかチェック
-                //         sizeWarningElement.style.display = 'none'; // 警告を非表示
-                //     }
-                // } else { // ロード完了後にこのブロックに入る場合
-                    // 前回のサイズと比較
-                    if (currentWidth === previousWidth && currentHeight === previousHeight) {
-                        // サイズが変化していない場合
-                        const warningText = `\u26A0\uFE0F \u30B9\u30AF\u30EA\u30FC\u30F3\u30B7\u30E7\u30C3\u30C8\u304C\u53D6\u5F97\u3055\u308C\u307E\u3057\u305F\uFF01 \u26A0\uFE0F`;
-                         if (sizeWarningElement) { // 要素が存在するかチェック
-                             sizeWarningElement.textContent = warningText;
-                             // style.display はCSSでflexにしているので 'flex' にする
-                             sizeWarningElement.style.display = 'flex'; // オーバーレイを表示
-                         }
-                         // Consoleの警告テキストも変更
-                         console.warn(`\u26A0\uFE0F \u30EA\u30B5\u30A4\u30BA\u30A4\u30D9\u30F3\u30C8\u767A\u751F (${timestamp})\u3002\u3057\u304B\u3057\u30B5\u30A4\u30BA(${currentWidth}x${currentHeight}) \u306F\u5909\u5316\u305B\u305A\u300C${warningText}\u300D\u3092\u8868\u793A \u26A0\uFE0F`);
-                    } else {
-                        // サイズが変化した場合
-                         if (sizeWarningElement) { // 要素が存在するかチェック
-                             sizeWarningElement.style.display = 'none'; // 警告を非表示
-                         }
-                         previousWidth = currentWidth;
-                         previousHeight = currentHeight;
-                         console.log('\u30B5\u30A4\u30BA\u304C\u5909\u5316\u3057\u307E\u3057\u305F\u3002\u65B0\u3057\u3044\u30B5\u30A4\u30BA\u3092\u8A18\u9332:', previousWidth, 'x', previousHeight);
-                    }
-                // } // isPageLoaded チェックで囲ったので、この else ブロックは不要になる
+                // 前回のサイズと比較
+                if (currentWidth === previousWidth && currentHeight === previousHeight) {
+                    // サイズが変化していない場合
+                    const warningText = `\u26A0\uFE0F \u30B9\u30AF\u30EA\u30FC\u30F3\u30B7\u30E7\u30C3\u30C8\u304C\u53D6\u5F97\u3055\u308C\u307E\u3057\u305F\uFF01 \u26A0\uFE0F`;
+                     if (sizeWarningElement) { // 要素が存在するかチェック
+                         sizeWarningElement.textContent = warningText;
+                         // style.display はCSSでflexにしているので 'flex' にする
+                         sizeWarningElement.style.display = 'flex'; // オーバーレイを表示
+                     }
+                     // Consoleの警告テキストも変更
+                     console.warn(`\u26A0\uFE0F \u30EA\u30B5\u30A4\u30BA\u30A4\u30D9\u30F3\u30C8\u767A\u751F (${timestamp})\u3002\u3057\u304B\u3057\u30B5\u30A4\u30BA(${currentWidth}x${currentHeight}) \u306F\u5909\u5316\u305B\u305A\u300C${warningText}\u300D\u3092\u8868\u793A \u26A0\uFE0F`);
+                } else {
+                    // サイズが変化した場合
+                     if (sizeWarningElement) { // 要素が存在するかチェック
+                         sizeWarningElement.style.display = 'none'; // 警告を非表示
+                     }
+                     previousWidth = currentWidth;
+                     previousHeight = currentHeight;
+                     console.log('\u30B5\u30A4\u30BA\u304C\u5909\u5316\u3057\u307E\u3057\u305F\u3002\u65B0\u3057\u3044\u30B5\u30A4\u30BA\u3092\u8A18\u9332:', previousWidth, 'x', previousHeight);
+                }
             }
         }
 
@@ -296,25 +378,29 @@
              // Load完了前のResizeは上記 isPageLoaded チェックでスキップされているため
         });
 
+        // Visual Viewport API の利用
+        if (window.visualViewport) {
+            console.log("現在のvisualViewportの幅:", window.visualViewport.width);
+            console.log("現在のvisualViewportの高さ:", window.visualViewport.height);
+            console.log("現在のvisualViewportのオフセットX:", window.visualViewport.offsetLeft);
+            console.log("現在のvisualViewportのオフセットY:", window.visualViewport.offsetTop);
+            console.log("現在のvisualViewportのスケール:", window.visualViewport.scale);
+            console.log("現在のvisualViewportのページX:", window.visualViewport.pageLeft);
+            console.log("現在のvisualViewportのページY:", window.visualViewport.pageTop);
 
-        console.log("現在のvisualViewportの幅:", window.visualViewport.width);
-        console.log("現在のvisualViewportの高さ:", window.visualViewport.height);
-        console.log("現在のvisualViewportのオフセットX:", window.visualViewport.offsetLeft);
-        console.log("現在のvisualViewportのオフセットY:", window.visualViewport.offsetTop);
-        console.log("現在のvisualViewportのスケール:", window.visualViewport.scale);
-        console.log("現在のvisualViewportのページX:", window.visualViewport.pageLeft);
-        console.log("現在のvisualViewportのページY:", window.visualViewport.pageTop);
-
-        window.visualViewport.addEventListener('resize', () => {
-  console.log('visualViewport がリサイズされました。');
-  console.log('新しい幅:', window.visualViewport.width);
-  console.log('新しい高さ:', window.visualViewport.height);
-  console.log('オフセット X:', window.visualViewport.offsetLeft);
-  console.log('オフセット Y:', window.visualViewport.offsetTop);
-    console.log('スケール:', window.visualViewport.scale);
-    console.log('ページ X:', window.visualViewport.pageLeft);
-    console.log('ページ Y:', window.visualViewport.pageTop);
-});
+            window.visualViewport.addEventListener('resize', () => {
+                console.log('visualViewport がリサイズされました。');
+                console.log('新しい幅:', window.visualViewport.width);
+                console.log('新しい高さ:', window.visualViewport.height);
+                console.log('オフセット X:', window.visualViewport.offsetLeft);
+                console.log('オフセット Y:', window.visualViewport.offsetTop);
+                console.log('スケール:', window.visualViewport.scale);
+                console.log('ページ X:', window.visualViewport.pageLeft);
+                console.log('ページ Y:', window.visualViewport.pageTop);
+            });
+        } else {
+            console.log('Visual Viewport API はこのブラウザではサポートされていません。');
+        }
 
         // 4. Resize イベント時
         // ウィンドウサイズ変更時に logCurrentSizes 関数内で比較・警告表示を行う

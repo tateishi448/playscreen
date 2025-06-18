@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Epic Quest Adventure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .popup-container {
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .popup-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .download-info {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid #00ff88;
+        }
+
+        .file-info {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .file-info strong {
+            color: #ffd700;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00b894);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            margin: 10px;
+            min-width: 200px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6);
+            background: linear-gradient(45deg, #c0392b, #a93226);
+        }
+
+        .download-btn:active {
+            transform: translateY(0px);
+        }
+
+        .secondary-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .secondary-btn:hover {
+            background: linear-gradient(45deg, #2980b9, #1f618d);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        .warning-text {
+            font-size: 0.8rem;
+            color: #f39c12;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        .blink {
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.5; }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .downloading {
+            display: none;
+        }
+
+        .downloading.active {
+            display: block;
+        }
+
+        .download-complete {
+            display: none;
+            color: #00ff88;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .download-complete.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-container">
+        <button class="close-btn" onclick="window.close()">&times;</button>
+        
+        <div class="popup-title">🎮 Download Ready!</div>
+        
+        <div class="download-info">
+            <div class="file-info">
+                <span>File Name:</span>
+                <strong>EpicQuestAdventure_Setup.exe</strong>
+            </div>
+            <div class="file-info">
+                <span>File Size:</span>
+                <strong>2.4 GB</strong>
+            </div>
+            <div class="file-info">
+                <span>Version:</span>
+                <strong>v1.0.0</strong>
+            </div>
+            <div class="file-info">
+                <span>Platform:</span>
+                <strong>Windows 10/11</strong>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="downloadButtons">
+            <button class="download-btn blink" onclick="startDownload()">
+                📥 CLICK HERE TO DOWNLOAD!
+            </button>
+            <br>
+            <button class="download-btn secondary-btn" onclick="startDownload()">
+                🚀 DOWNLOAD NOW!
+            </button>
+        </div>
+
+        <div class="downloading" id="downloadingText">
+            <p>⏳ Preparing download...</p>
+        </div>
+
+        <div class="download-complete" id="downloadComplete">
+            <p>✅ Download completed successfully!</p>
+            <p>Check your Downloads folder.</p>
+        </div>
+
+        <div class="warning-text">
+            ⚠️ This is a demo. No actual file will be downloaded.
+        </div>
+    </div>
+
+    <script>
+        let downloadInProgress = false;
+
+        function startDownload() {
+            if (downloadInProgress) return;
+            
+            downloadInProgress = true;
+            
+            // ボタンを隠してダウンロード中表示
+            document.getElementById('downloadButtons').style.display = 'none';
+            document.getElementById('downloadingText').classList.add('active');
+            
+            // プログレスバーのアニメーション
+            const progressFill = document.getElementById('progressFill');
+            let progress = 0;
+            
+            const progressInterval = setInterval(() => {
+                progress += Math.random() * 15 + 5; // ランダムな進行速度
+                if (progress > 100) progress = 100;
+                
+                progressFill.style.width = progress + '%';
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    
+                    // ダウンロード完了
+                    setTimeout(() => {
+                        document.getElementById('downloadingText').classList.remove('active');
+                        document.getElementById('downloadComplete').classList.add('active');
+                        
+                        // 架空のファイルダウンロードをシミュレート
+                        downloadFakeFile();
+                        
+                        // 3秒後にポップアップを閉じる
+                        setTimeout(() => {
+                            window.close();
+                        }, 3000);
+                    }, 500);
+                }
+            }, 200);
+        }
+
+        function downloadFakeFile() {
+            // 架空のファイルを作成してダウンロード
+            const fakeFileContent = `Epic Quest Adventure Game Installer
+            
+This is a demo file for testing purposes.
+The actual game would be downloaded here.
+
+Game Features:
+- Massive open world exploration
+- Epic boss battles
+- Character customization
+- Multiplayer support
+- Regular content updates
+
+Thank you for testing the download system!
+
+Version: 1.0.0
+Size: 2.4 GB (simulated)
+Platform: Windows 10/11
+`;
+
+            const blob = new Blob([fakeFileContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'EpicQuestAdventure_Setup.txt'; // 実際のexeファイルの代わりにtxtファイル
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // ポップアップが開かれた時のアニメーション
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // ESCキーでポップアップを閉じる
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                window.close();
+            }
+        });
+    </script>
+</body>
+</html>

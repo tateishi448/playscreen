@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .download-btn.secondary {
+            background-color: #28a745;
+        }
+        
+        .download-btn.secondary:hover {
+            background-color: #1e7e34;
+        }
+        
+        .download-btn.tertiary {
+            background-color: #dc3545;
+        }
+        
+        .download-btn.tertiary:hover {
+            background-color: #c82333;
+        }
+        
+        .info {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>File Download Test Page</h1>
+        <p>Welcome to the download test page. Click any of the buttons below to download a dummy text file. The page will remain unchanged, but a file will be downloaded to your device.</p>
+        
+        <button class="download-btn" onclick="downloadFile('sample.txt', 'This is a sample text file downloaded from the test page.')">
+            Click Here
+        </button>
+        
+        <button class="download-btn secondary" onclick="downloadFile('document.txt', 'Hello! This is a dummy document file.\n\nThis file was generated automatically when you clicked the download button.\n\nThank you for testing the download functionality!')">
+            Download Now
+        </button>
+        
+        <button class="download-btn tertiary" onclick="downloadFile('readme.txt', 'README\n========\n\nThis is a dummy README file.\n\nFeatures:\n- Simple download functionality\n- No page refresh required\n- Instant file generation\n\nEnjoy testing!')">
+            Get File
+        </button>
+        
+        <div class="info">
+            <strong>Note:</strong> These buttons will download dummy text files to your computer. No actual data is being transferred from a server - the files are generated dynamically in your browser.
+        </div>
+    </div>
+
+    <script>
+        function downloadFile(filename, content) {
+            // Create a Blob with the text content
+            const blob = new Blob([content], { type: 'text/plain' });
+            
+            // Create a temporary URL for the blob
+            const url = window.URL.createObjectURL(blob);
+            
+            // Create a temporary anchor element for downloading
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            
+            // Append to body, click, and remove
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            
+            // Clean up the URL object
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

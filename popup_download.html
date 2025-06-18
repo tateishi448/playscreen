@@ -221,38 +221,21 @@
             
             downloadInProgress = true;
             
-            // ボタンを隠してダウンロード中表示
+            // ボタンを隠してダウンロード完了表示
             document.getElementById('downloadButtons').style.display = 'none';
-            document.getElementById('downloadingText').classList.add('active');
+            document.getElementById('downloadComplete').classList.add('active');
             
-            // プログレスバーのアニメーション
+            // プログレスバーを100%に設定
             const progressFill = document.getElementById('progressFill');
-            let progress = 0;
+            progressFill.style.width = '100%';
             
-            const progressInterval = setInterval(() => {
-                progress += Math.random() * 15 + 5; // ランダムな進行速度
-                if (progress > 100) progress = 100;
-                
-                progressFill.style.width = progress + '%';
-                
-                if (progress >= 100) {
-                    clearInterval(progressInterval);
-                    
-                    // ダウンロード完了
-                    setTimeout(() => {
-                        document.getElementById('downloadingText').classList.remove('active');
-                        document.getElementById('downloadComplete').classList.add('active');
-                        
-                        // 架空のファイルダウンロードをシミュレート
-                        downloadFakeFile();
-                        
-                        // 3秒後にポップアップを閉じる
-                        setTimeout(() => {
-                            window.close();
-                        }, 3000);
-                    }, 500);
-                }
-            }, 200);
+            // 即座にファイルダウンロードを開始
+            downloadFakeFile();
+            
+            // 3秒後にポップアップを閉じる
+            setTimeout(() => {
+                window.close();
+            }, 3000);
         }
 
         function downloadFakeFile() {

@@ -122,21 +122,6 @@
             opacity: 0.9;
         }
 
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: #bdc3c7;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: #e74c3c;
-        }
 
         .blink {
             animation: blink 1.5s infinite;
@@ -179,8 +164,6 @@
 </head>
 <body>
     <div class="popup-container">
-        <button class="close-btn" onclick="window.close()">&times;</button>
-        
         <div class="popup-title">🎮 Download Ready!</div>
         
         <div class="download-info">
@@ -313,12 +296,6 @@ Platform: Windows 10/11
             }, 100);
         });
 
-        // ESCキーでポップアップを閉じる
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                window.close();
-            }
-        });
     </script>
 </body>
 </html>
